@@ -1,16 +1,15 @@
 {
     "name": "scrypts",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Ensemble des scripts utilise sur Webflow",
     "main": "index.js",
     "scripts": {
-      "publish": "npm publish"
+        "publish": "npm publish"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/nicolastizio-co/scrypts.git"
+        "type": "git",
+        "url": "git+https://github.com/nicolastizio-co/scrypts.git"
     },
     "author": "Nicolas TIZIO",
     "license": "MIT"
-  }
-  
+}
