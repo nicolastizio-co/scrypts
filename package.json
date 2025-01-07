@@ -1,15 +1,22 @@
 {
-    "name": "scrypts",
-    "version": "1.0.7",
+    "name": "@@nicolastizioco/scrypts",
+    "version": "1.2.0",
     "description": "Ensemble des scripts utilise sur Webflow",
-    "main": "index.js",
-    "scripts": {
-        "publish": "npm publish"
+    "main": "src/index.js",
+    "files": [
+        "src/**/*"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
+    "keywords": [
+        "script"
+    ],
+    "author": "Nicolas Tizio",
+    "license": "ISC",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/nicolastizio-co/scrypts.git"
-    },
-    "author": "Nicolas TIZIO",
-    "license": "MIT"
+    }
 }
