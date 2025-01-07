@@ -1,6 +1,6 @@
 {
     "name": "scrypts",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Ensemble des scripts utilise sur Webflow",
     "main": "index.js",
     "scripts": {
