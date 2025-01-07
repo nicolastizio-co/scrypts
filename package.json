@@ -1,5 +1,5 @@
 {
-    "name": "@@nicolastizioco/scrypts",
+    "name": "@nicolastizioco/scrypts",
     "version": "1.2.0",
     "description": "Ensemble des scripts utilise sur Webflow",
     "main": "src/index.js",
