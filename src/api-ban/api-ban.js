@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       transition: all 300ms ease;
       cursor: pointer;
       background-color: transparent;
+      scroll-margin: 0.5rem;
     }
     [data-ban-item]:not([data-ban-item="no-css"]).active,
     [data-ban-item]:not([data-ban-item="no-css"]):hover {
