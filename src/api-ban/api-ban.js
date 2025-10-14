@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
       item.classList.remove("active");
       if (index === currentFocus) {
         item.classList.add("active");
-        // Scroll automatique pour garder l'élément visible
         item.scrollIntoView({ block: "nearest", behavior: "smooth" });
       }
     });
@@ -77,22 +76,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const handleSelection = (
     { street, zipcode, city, fulltext },
     inputField,
+    streetField,
     zipcodeField,
     cityField,
     resultsContainer,
     shouldLog
   ) => {
-    let selectedAddress = "";
     if (inputField) {
-      if (inputField.getAttribute("data-ban-input") === "split") {
-        const addressPart = fulltext.split(",")[0];
-        inputField.value = addressPart || street || "";
-        selectedAddress = inputField.value;
-      } else {
-        inputField.value =
-          fulltext || `${street || ""}, ${zipcode || ""} ${city || ""}`;
-        selectedAddress = inputField.value;
-      }
+      inputField.value = fulltext || `${street || ""}, ${zipcode || ""} ${city || ""}`;
+      logMessage(shouldLog, "📍 :", inputField.value);
+    }
+    if (streetField) {
+      const addressPart = fulltext ? fulltext.split(",")[0] : street;
+      streetField.value = addressPart || "";
+      logMessage(shouldLog, "🛣️ :", streetField.value);
     }
     if (zipcodeField) {
       zipcodeField.value = zipcode || "";
@@ -102,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
       cityField.value = city || "";
       logMessage(shouldLog, "🏙️ :", cityField.value);
     }
-    logMessage(shouldLog, "📍 :", selectedAddress);
     resultsContainer.style.display = "none";
   };
 
@@ -113,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
     handleClick,
     resetFocus
   ) => {
-    // Récupérer la classe et l'attribut data-ban-item d'origine s'ils existent
     const existingItem = resultsContainer.querySelector("[data-ban-item]");
     const originalClass = existingItem ? existingItem.className : "";
     const originalDataBanItem = existingItem ? existingItem.getAttribute("data-ban-item") : "";
@@ -157,11 +152,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const inputField = wrapper.querySelector("[data-ban-input]");
     const resultsContainer = wrapper.querySelector("[data-ban-results]");
+    const streetField = wrapper.querySelector("[data-ban-street]");
     const cityField = wrapper.querySelector("[data-ban-city]");
     const zipcodeField = wrapper.querySelector("[data-ban-zipcode]");
+
+    const mainField = inputField || streetField;
     let currentFocus = -1;
 
-    if (!inputField || !resultsContainer) return;
+    if (!mainField || !resultsContainer) return;
 
     const maxResultsAttr = resultsContainer.getAttribute(
       "data-ban-results-count"
@@ -195,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             handleSelection(
               result,
               inputField,
+              streetField,
               zipcodeField,
               cityField,
               resultsContainer,
@@ -207,12 +206,12 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 300);
 
-    inputField.addEventListener("input", () => {
-      const query = inputField.value.trim();
+    mainField.addEventListener("input", () => {
+      const query = mainField.value.trim();
       performSearch(query);
     });
 
-    inputField.addEventListener("keydown", (e) => {
+    mainField.addEventListener("keydown", (e) => {
       const items = resultsContainer.querySelectorAll("[data-ban-item]");
       if (e.key === "Escape") {
         e.preventDefault();
