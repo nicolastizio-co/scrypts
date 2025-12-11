@@ -1,6 +1,6 @@
 {
     "name": "@nicolastizioco/scrypts",
-    "version": "1.3.6",
+    "version": "1.3.7",
     "description": "Ensemble des scripts utilise sur Webflow",
     "main": "src/index.js",
     "files": [
